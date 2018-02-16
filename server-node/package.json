@@ -1,0 +1,18 @@
+{
+  "name": "classchat",
+  "version": "1.0.0",
+  "description": "ClassChat App Server",
+  "main": "node-server.js",
+  "scripts": {
+    "test": "node node-server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33",
+    "mongojs": "^2.4.1",
+    "uuid": "^3.1.0"
+  }
+}

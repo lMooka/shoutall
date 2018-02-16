@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="design.css">
+	</head>
+	<body>
+		<nav id="menu" class="menu">
+			<ul>
+			    <li><a id="btnRefresh" href="#refresh">Atualizar</a></li>
+                <li><a href="#chat">Chat</a></li>
+                <li><a id="btnLogin" href="#login">Login</a></li>
+			</ul>
+        </nav>
+
+        <div id="login" class="hide box register">
+            <ul>
+                <li>Login <br/><input id="inputEmail" type="email" class="menu-chat ul li a"/><br/></li>
+                <li>Password <br/><input id="inputPassword" type="password" class="menu-chat ul li a"/><br/></li>
+                <li><button id="btnRegister">Registrar</a></li>
+            </ul>
+        </div>
+
+        <div id="chat"> 
+            <section id="sectionChatName">
+                <div id="menu" class="menu-chat">
+                    <ul>
+                        <li><img src="images/hashtag.png" width="32px" height="32px" alt="Mountain View"/></li>
+                        <li><input id="chatNameInput" class="menu-chat ul li a"/></li>
+                        <li><a id="btnChangeChat"href="#">Mudar</a></li>
+                    </ul>
+                </nav>
+            </section>
+            <section id="sectionMessageSend">
+                <div id="menu" class="menu-chat">
+                    <ul>
+                        <li><img src="images/message.png" width="32px" height="32px" alt="Mountain View"/></li>
+                        <li><input id="messageInput" class="menu-chat ul li a"/></li>
+                        <li><a id="btnSendMessage"href="#">Enviar</a></li>
+                    </ul>
+                </nav>
+            </section>
+            <section>
+                <div id="messageSection"/>
+            </section>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>
