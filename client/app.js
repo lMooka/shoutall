@@ -5,6 +5,8 @@ var btnSendMessage = document.getElementById("btnSendMessage");
 var messageInput = document.getElementById("messageInput");
 var chatNameInput = document.getElementById("chatNameInput");
 var btnLogin = document.getElementById("btnLogin");
+var btnRegister = document.getElementById("btnRegister");
+var btnChatInput = document.getElementById("chatNameInput");
 
 var showingRegister = false;
 
@@ -49,17 +51,17 @@ function WSAuth() {
 
 /* --------- WebService ---------- */
 function WSRefreshChat() {
-    if(user == undefined) {
-        WSAuth();
-    }
+    //if(user == undefined) {
+    //    WSAuth();
+    //}
 
     var ajax = new XMLHttpRequest();
 
     if(messageArray.length == 0) {
-        ajax.open('GET', requestUrl + `/messages.php?chat_name=default&after_id=0`);
+        ajax.open('GET', requestUrl + `/messages.php?chat_name=${chat_name}&after_id=0`);
     } else {
         var lastMessage = messageArray[0];
-        ajax.open('GET', requestUrl + `/messages.php?chat_name=default&after_id=${lastMessage.id}`);
+        ajax.open('GET', requestUrl + `/messages.php?chat_name=${chat_name}&after_id=${lastMessage.id}`);
     }
     
     ajax.onload = function() {
@@ -125,7 +127,7 @@ function WSSendMessage(message) {
         WSRefreshChat();
     };
 
-    ajax.send(`auth_token=0&chat_name=default&content=${message}`);
+    ajax.send(`auth_token=0&chat_name=${chat_name}&content=${message}`);
     messageInput.value = "";
 }
 
@@ -149,7 +151,7 @@ function onChatReceived(data) {
     for(i = 0; i < data.length; i++) {
         messageArray.push(data[i]);
         console.log(JSON.stringify(data));
-        var messageHtml = generateMessageHtml(data[i].owner_id, data[i].creation_date, data[i].content);
+        var messageHtml = generateMessageHtml((data[i].owner_id == 0 ? 'Anônimo' : data[i].owner_id), data[i].creation_date, data[i].content);
         messageSection.appendChild(messageHtml);
     }
 }
@@ -169,6 +171,12 @@ function showLoginWindow(value) {
         showingRegister = false;
     }
 }
+
+function clearChat() {
+    messageSection.innerHTML = "";
+    messageArray = [];
+}
+
 // Eventos
 refreshButton.addEventListener("click", function() {
     WSRefreshChat();
@@ -180,14 +188,21 @@ btnSendMessage.addEventListener("click", function() {
     return;
 });
 
+btnChangeChat.addEventListener("click", function() {
+    chat_name = btnChatInput.value;
+    clearChat();
+    WSRefreshChat();
+    return;
+});
+
 btnLogin.addEventListener("click", function() {
-    var divregister = document.getElementById("login");
+    //var divregister = document.getElementById("login");
     showLoginWindow(showingRegister);
 
     return;
 });
 
-document.getElementById("btnRegister").addEventListener("click", function() {
+btnRegister.addEventListener("click", function() {
     var email = document.getElementById("inputEmail").value;
     var password = document.getElementById("inputPassword").value;
 
@@ -196,6 +211,7 @@ document.getElementById("btnRegister").addEventListener("click", function() {
     return;
 });
 
+btnChatInput.value = chat_name;
 WSRefreshChat();
 
 
